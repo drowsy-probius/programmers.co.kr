@@ -1,10 +1,13 @@
+g++ version
+```terminal
+user$ g++ --version
+g++ (Debian 8.3.0-6) 8.3.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
 # TODO
-coding-test-kit/stack,queue/42524
-
-
-
-
-
 
 
 
