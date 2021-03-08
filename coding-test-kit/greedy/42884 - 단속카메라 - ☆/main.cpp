@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/**
+ * 진출 지점이 key보다 크면 범위 안에 있음.
+ * 아래 코드는 비효율적
+ */
 bool inRange(int key, vector<int> route)
 {
   return (key >= route[0] && key <= route[1]);
