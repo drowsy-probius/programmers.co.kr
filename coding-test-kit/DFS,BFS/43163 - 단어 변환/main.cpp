@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <queue>
-#include <algorithm>
 
 using namespace std;
 
@@ -10,45 +9,48 @@ bool isConvertable(string a, string b)
   int count;
   for(int i=0; i<a.size(); i++)
   {
-    if(a.at(i) != b.at(i)) count++;
+    if(a.at(i) != b.at(i))
+    {
+      count++;
+    }
   }
   return count == 1;
 }
 
-
 int solution(string begin, string target, vector<string> words) {
-  auto it = find(words.begin(), words.end(), begin);
-  if(it == words.end()) return 0;
+  int answer = 0;
+  int depth = 0;
+  string current = "";
 
-  int answer = __INT_MAX__;
-  for(string word: words)
+  queue<pair<int, string>> q;
+  vector<int> visited(words.size(), false);
+
+  q.push(make_pair(0, begin));
+  while(!q.empty())
   {
-    if(!isConvertable(begin, word)) continue;
+    depth = q.front().first;
+    current = q.front().second;
+    q.pop();
 
-    queue<pair<int, string>> q;
-    vector<string> visited;
-    q.push(make_pair(1, word));
-    while(!q.empty())
+    if(current.compare(target) == 0)
     {
-      auto front = q.front();
-      q.pop();
-      int depth = front.first;
-      string current = front.second;
+      answer = depth;
+      break;
+    }
 
-      if(current.compare(target) == 0)
+    for(int i=0; i<words.size(); i++)
+    {
+      if(visited[i])
       {
-        answer = min(depth, answer);
         continue;
       }
-
-      for(string _word: words)
+      if(!isConvertable(current, words[i]))
       {
-        if(!isConvertable(current, _word)) continue;
-        auto it = find(visited.begin(), visited.end(), _word);
-        if(it != visited.end()) continue;
-
-        q.push(make_pair(depth+1, _word));
+        continue;
       }
+      
+      visited[i] = true;
+      q.push(make_pair(depth + 1, words[i]));
     }
   }
 
@@ -59,7 +61,12 @@ int solution(string begin, string target, vector<string> words) {
 #include "iostream"
 int main(void)
 {
-  assert(solution("hit", "cog", {"hot", "dot", "dog", "lot", "log"}) == 0);
+  // assert(solution("hit", "cog", {"hot", "dot", "dog", "lot", "log"}) == 0);
   assert(solution("hit", "cog", {"hot", "dot", "dog", "lot", "log", "cog"}) ==  4);
+  // assert(solution("asdf", "ffff", {"addf", "dddf", "fddf", "fdff", "ffff"}) == 4);
+
+  assert(solution("0000", "1234", {"1111", "0010", "0100", "0020", "1000", "1200", "1030", "1300", "1234", "1204"}) == 4);
+  assert(solution("000", "333", {"001", "011", "020", "031", "032", "133", "233", "030", "033", "333"}) == 3);
+
   return 0;
 }
