@@ -38,10 +38,12 @@ int solution(string begin, string target, vector<string> words) {
       if(current.compare(target) == 0)
       {
         answer = min(depth, answer);
+        continue;
       }
 
       for(string _word: words)
       {
+        if(!isConvertable(current, _word)) continue;
         auto it = find(visited.begin(), visited.end(), _word);
         if(it != visited.end()) continue;
 
