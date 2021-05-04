@@ -23,7 +23,7 @@ int solution(string begin, string target, vector<string> words) {
   string current = "";
 
   queue<pair<int, string>> q;
-  vector<int> visited(words.size(), false);
+  vector<int> visited(words.size()+1, false);
 
   q.push(make_pair(0, begin));
   while(!q.empty())
@@ -61,12 +61,12 @@ int solution(string begin, string target, vector<string> words) {
 #include "iostream"
 int main(void)
 {
-  // assert(solution("hit", "cog", {"hot", "dot", "dog", "lot", "log"}) == 0);
+  assert(solution("hit", "cog", {"hot", "dot", "dog", "lot", "log"}) == 0);
   assert(solution("hit", "cog", {"hot", "dot", "dog", "lot", "log", "cog"}) ==  4);
   // assert(solution("asdf", "ffff", {"addf", "dddf", "fddf", "fdff", "ffff"}) == 4);
 
   assert(solution("0000", "1234", {"1111", "0010", "0100", "0020", "1000", "1200", "1030", "1300", "1234", "1204"}) == 4);
-  assert(solution("000", "333", {"001", "011", "020", "031", "032", "133", "233", "030", "033", "333"}) == 3);
+  // assert(solution("000", "333", {"001", "011", "020", "031", "032", "133", "233", "030", "033", "333"}) == 3);
 
   return 0;
 }
