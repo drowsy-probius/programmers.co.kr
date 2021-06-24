@@ -1,14 +1,42 @@
 #include <string>
 #include <vector>
+#include <algorithm>
+
+#include "iostream"
 
 using namespace std;
 
 int solution(int distance, vector<int> rocks, int n) {
   int answer = 0;
-  return answer;
+  vector<int> space;
+
+  sort(rocks.begin(), rocks.end(), less<int>());
+
+  for(int i=0; i<rocks.size(); i++)
+  {
+    if(i==0) space.push_back(rocks.at(i));
+    else space.push_back(rocks.at(i) - rocks.at(i-1));
+  }
+
+  while(n--)
+  {
+    vector<int>::iterator minimal = min_element(space.begin(), space.end());
+    int min_idx = std::distance(space.begin(), minimal);
+    
+    if(min_idx + 1 == space.size())
+    {
+      space.at(min_idx - 1) += space.at(min_idx);
+    }
+    else
+    {
+      space.at(min_idx + 1) += space.at(min_idx);
+    }
+    space.erase(minimal);
+  }
+
+  return *min_element(space.begin(), space.end());
 }
 
-#include "iostream"
 #include "cassert"
 int main(void)
 {
