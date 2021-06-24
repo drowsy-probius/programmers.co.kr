@@ -40,6 +40,7 @@ int solution(int distance, vector<int> rocks, int n) {
 #include "cassert"
 int main(void)
 {
-  assert(solution(25, {2, 14, 11, 21, 17}, 2) == 4);
+  // assert(solution(25, {2, 14, 11, 21, 17}, 2) == 4);
+  assert(solution(20, {15, 16, 17, 18, 19}, 2) == 2);
   return 0;
 }
